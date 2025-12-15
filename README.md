@@ -26,6 +26,7 @@ export SUPABASE_URL=...
 export SUPABASE_SERVICE_KEY=...
 export OPENAI_API_KEY=...
 ```
+(or) created a .env file in the project root
 
 ## Run
 ```bash
@@ -35,7 +36,29 @@ uvicorn app.main:app --reload
 Open `frontend/index.html` in browser.
 
 ## Supabase Schema
-See SQL in assignment solution.
+'''bash
+-- Enable UUID generation
+create extension if not exists "uuid-ossp";
+
+-- Main session table
+create table if not exists public.sessions (
+  session_id text primary key,
+  user_id text,
+  start_time timestamptz default now(),
+  end_time timestamptz,
+  duration_seconds integer,
+  summary text
+);
+
+-- Detailed event log table
+create table if not exists public.session_events (
+  id bigserial primary key,
+  session_id text references public.sessions(session_id) on delete cascade,
+  event_type text,
+  content text,
+  created_at timestamptz default now()
+);
+'''
 
 ## Evaluation Notes
 This project demonstrates:
