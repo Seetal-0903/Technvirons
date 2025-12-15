@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>Realtime AI WebSocket Test</h3>
+<input id="msg" placeholder="Message" />
+<button onclick="send()">Send</button>
+<pre id="chat"></pre>
+
+<script>
+const ws = new WebSocket("ws://localhost:8000/ws/session/demo");
+ws.onmessage = e => chat.textContent += e.data;
+
+function send() {
+  ws.send(msg.value);
+  msg.value = "";
+}
+</script>
+</body>
+</html>
