@@ -36,7 +36,7 @@ uvicorn app.main:app --reload
 Open `frontend/index.html` in browser.
 
 ## Supabase Schema
-'''bash
+```bash
 -- Enable UUID generation
 create extension if not exists "uuid-ossp";
 
@@ -58,7 +58,7 @@ create table if not exists public.session_events (
   content text,
   created_at timestamptz default now()
 );
-'''
+```
 
 ## Evaluation Notes
 This project demonstrates:
